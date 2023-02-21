@@ -9,13 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("index")
+@RequestMapping("/posts")
 public class PostController {
     @Autowired
     PostService postService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    List<postEntity> getTweet() {
-        return userService.getAccount();
+    //配列情報を返す
+    @GetMapping("/index")
+    public List<PostEntity> index() {
+        return postService.getAllPost();
     }
+
+    @GetMapping("{id}")
+    public List<PostEntity> getById(@PathVariable("id") String id) {
+      return postService.getAllPost(id);
+    }
+  
+
+    //投稿データの保存
+    // @PostMapping("/form")
+    // public String create(TestForm testForm) {
+    // }    
 }
