@@ -1,5 +1,7 @@
 package com.example.test.entity;
 
+import com.example.test.entity.UserEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,6 @@ public class PostEntity {
     @Column(nullable = false)
     private int user_id;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity user;
+    @ManyToOne
+    UserEntity user_entity;
 }

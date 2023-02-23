@@ -19,7 +19,8 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public List<PostEntity> getPost(String id) {
-        return postRepository.findById(id).orElseThrow();;
+    public PostEntity getPost(Integer id) {
+        return postRepository.findById(id).orElseThrow();
     }
+
 }

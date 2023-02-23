@@ -5,8 +5,7 @@ services:
     env_file:
       - ./mysql/db.env 
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/log:/var/log/mysql
+      - db-store:/var/lib/mysql
     ports:
       - 3306:3306
   java:
@@ -22,3 +21,6 @@ services:
       - 8080:8080
     depends_on:
       - mysql
+
+volumes:
+  db-store:
