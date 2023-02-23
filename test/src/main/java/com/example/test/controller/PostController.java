@@ -23,4 +23,14 @@ public class PostController {
     PostEntity getById(@PathVariable("id") Integer id) {
         return postService.getPost(id);
     }
+
+    @PostMapping
+    public void save(@RequestMapping PostEntity postEntity) {
+        postService.savePost(postEntity);
+    }
+
+    @DeleteMapping("{id}")
+    public User delete(@PathVariable("id") Integer id) {
+        postService.deletePost(id);
+    }
 }
