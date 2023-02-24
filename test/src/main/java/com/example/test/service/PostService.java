@@ -23,11 +23,11 @@ public class PostService {
         return postRepository.findById(id).orElseThrow();
     }
 
-    public PostEntity savePost(PostEntity postEntity) {
-        return postRepository.save(postEntity);
+    public void savePost(PostEntity postEntity) {
+        postRepository.save(postEntity);
     }
 
-    public PostEntity deletePost(Integer id) {
-        return postRepository.deleteById(id);
+    public void deletePost(Integer id) {
+        postRepository.deleteById(id);
     }
 }
