@@ -1,7 +1,5 @@
 package com.example.test.entity;
 
-import com.example.test.entity.UserEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +23,5 @@ public class PostEntity {
     private int user_id;
 
     @ManyToOne
-    UserEntity user_entity;
+    private UserEntity userEntity;
 }

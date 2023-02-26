@@ -18,4 +18,8 @@ public class UserService {
     public List<UserEntity> getAccount() {
         return userRepository.findAll();
     }
+
+    public UserEntity getUser(Integer id) {
+        return userRepository.findById(id).orElseThrow();
+    }
 }
