@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.graphhopper.external:jackson-datatype-jts:1.0-2.7'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	implementation 'com.twitter:twitter-api-java-sdk:2.0.3'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
