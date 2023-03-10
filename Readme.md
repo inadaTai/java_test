@@ -15,3 +15,11 @@ sh gradlew build
 
 ## sh gradlew buildを実行し「xargs is not available」と表示されたら以下を実行。
 microdnf install findutils
+
+# 勉強の参考にしたサイトは以下になります。
+
+## リレーション先相互参照する時に無限ループしてしまう問題に直面した時に参考にしたサイト
+https://qiita.com/sengoku/items/56bc6319759fee6d15e3
+
+## ５秒おきに定期実行する参考記事
+https://spring.pleiades.io/guides/gs/scheduling-tasks/

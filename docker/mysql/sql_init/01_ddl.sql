@@ -13,9 +13,15 @@ CREATE TABLE IF NOT EXISTS java_test.users(
 
 CREATE TABLE IF NOT EXISTS java_test.posts(
     id  int PRIMARY KEY AUTO_INCREMENT,
-    content varchar(30) NOT NULL,
+    content  varchar(30) NOT NULL,
     user_id INT NOT NULL,
     CONSTRAINT `fkey_users_table_id` FOREIGN KEY (`user_id`) REFERENCES  `users` (`id`),
     INDEX(id, user_id)
 );
 
+CREATE TABLE IF NOT EXISTS java_test.people(
+    person_id  int PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    INDEX(person_id)
+);
