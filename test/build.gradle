@@ -23,7 +23,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.graphhopper.external:jackson-datatype-jts:1.0-2.7'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	//twitterのapiで利用してるライブラリ(ダミーデータ投入シーダーなどで利用)
 	implementation 'com.twitter:twitter-api-java-sdk:2.0.3'
+	//faker(ダミーデータ投入シーダーなどで利用)
+	//@see https://github.com/DiUS/java-faker/issues/327
+	implementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'snakeyaml' }
+	implementation group: 'org.yaml', name: 'snakeyaml', version: '1.17'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
