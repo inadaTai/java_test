@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("api/users")
 public class UserController {
     @Autowired
     UserService userService;
 
     @GetMapping("index")
+    // @ApiOperation(value = "特になし", notes = "ユーザリストを参照します")
     List<UserEntity> index() {
         return userService.getAccount();
     }

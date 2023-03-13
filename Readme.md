@@ -23,3 +23,6 @@ https://qiita.com/sengoku/items/56bc6319759fee6d15e3
 
 ## ５秒おきに定期実行する参考記事
 https://spring.pleiades.io/guides/gs/scheduling-tasks/
+
+## APIドキュメントについて、swaggerAPIを導入した。
+https://qiita.com/nooboolean/items/ee794ec4b30d9e93bf9f

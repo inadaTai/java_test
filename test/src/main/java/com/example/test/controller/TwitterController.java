@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.test.service.TwitterServiceImpl;
  
 @RestController
-@RequestMapping("twitter")
+@RequestMapping("api/twitter")
 public class TwitterController {
  
     @Autowired

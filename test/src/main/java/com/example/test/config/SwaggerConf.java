@@ -24,7 +24,7 @@ public class SwaggerConf {
         return new Docket(DocumentationType.SWAGGER_2) // SWAGGER_12, SWAGGER_2, SWAGGER_WEBがあるがどれが良いのかあまりわからない
                 .select() //ApiSelectorBuilderの生成
                 .apis(RequestHandlerSelectors.any()) //ドキュメントの対象となるRequestHandlerを設定
-                .paths(PathSelectors.regex("/v1.*")) //ドキュメントの対象となるPathを設定
+                .paths(PathSelectors.regex("/api.*")) //ドキュメントの対象となるPathを設定
                 .build()
                 .apiInfo(getApiInfo()); //ApiInfo型でAPIの基本情報設定
     }
