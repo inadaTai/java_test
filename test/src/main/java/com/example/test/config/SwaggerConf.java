@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConf {
-
+    
     @Bean
     public Docket swaggerPlugin() {
         return new Docket(DocumentationType.SWAGGER_2) // SWAGGER_12, SWAGGER_2, SWAGGER_WEBがあるがどれが良いのかあまりわからない

@@ -9,13 +9,15 @@ import com.example.test.repository.PersonRepository;
 import com.example.test.entity.PersonEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 @Component
 public class PersonSeeder implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(PersonSeeder.class);
     
-    @Autowired   
+    @Autowired
     PersonRepository personRepository; 
 
     @Override
@@ -40,15 +42,23 @@ public class PersonSeeder implements CommandLineRunner {
             br.readLine();
             List<PersonEntity> persons = personRepository.findAll();
             Integer person_cnt = persons.size();
+
             if(person_cnt != 0){
                 log.info("already exist person data");
                 return ;
             }
+            //fixme:後でバルクインサートに修正をかける。
+            Integer cnt = 1;
             while ((line = br.readLine()) != null) {
                 data = line.split(",");
-                PersonEntity newEntity = new PersonEntity(data[0], data[1]);
-                personRepository.save(newEntity);
+                // List<PersonEntity> entities = Arrays.asList(
+                //     new PersonEntity(cnt, data[0], data[1])
+                // );
+                PersonEntity personEntity = new PersonEntity(cnt, data[0], data[1]);
+                personRepository.save(personEntity);
+                cnt++;
             }
+            // personRepository.save(entities);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
