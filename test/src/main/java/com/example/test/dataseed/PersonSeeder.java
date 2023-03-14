@@ -9,8 +9,8 @@ import com.example.test.repository.PersonRepository;
 import com.example.test.entity.PersonEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 @Component
 public class PersonSeeder implements CommandLineRunner {
@@ -26,12 +26,16 @@ public class PersonSeeder implements CommandLineRunner {
 	}
     
     /**
-     * @see https://qiita.com/rubytomato@github/items/4f0c64eb9a24eaceaa6e
-     * 毎日定期実行されるタスクです。
-     * cronについては上記を参考にした。
+     * personsテーブルへCSVを参照し、データ投入するロジック
+     * ※イニシャライズ用の為、対象のテーブルにデータが存在する場合はログ出力して以降の処理は実行しない。
     */
 	private void loadPersonData() {
         log.info("start seeder");
+        Boolean check_person_count = checkPersonData();
+        if(check_person_count){
+            log.info("already exist person data");
+            return;
+        }
         BufferedReader br = null;
         String data_csv = "src/main/resources/csv/user-data.csv";
         try {
@@ -40,25 +44,14 @@ public class PersonSeeder implements CommandLineRunner {
             String line;
             String[] data;
             br.readLine();
-            List<PersonEntity> persons = personRepository.findAll();
-            Integer person_cnt = persons.size();
-
-            if(person_cnt != 0){
-                log.info("already exist person data");
-                return ;
-            }
-            //fixme:後でバルクインサートに修正をかける。
             Integer cnt = 1;
+            List<PersonEntity> entities = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 data = line.split(",");
-                // List<PersonEntity> entities = Arrays.asList(
-                //     new PersonEntity(cnt, data[0], data[1])
-                // );
-                PersonEntity personEntity = new PersonEntity(cnt, data[0], data[1]);
-                personRepository.save(personEntity);
+                entities.add(new PersonEntity(cnt, data[0], data[1]));
                 cnt++;
             }
-            // personRepository.save(entities);
+            personRepository.saveAll(entities);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -69,5 +62,17 @@ public class PersonSeeder implements CommandLineRunner {
             }
         }
         return ;
-	}
+    }
+
+    /**
+     * 
+     */
+    private boolean checkPersonData() {
+        List<PersonEntity> persons = personRepository.findAll();
+        Integer person_cnt = persons.size();
+        if(person_cnt != 0){
+            return true;
+        }
+        return false;
+    }
 }
