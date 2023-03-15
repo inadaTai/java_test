@@ -65,7 +65,7 @@ public class PersonSeeder implements CommandLineRunner {
     }
 
     /**
-     * 
+     * 対象テーブルにデータが存在するかチェックする関数
      */
     private boolean checkPersonData() {
         List<PersonEntity> persons = personRepository.findAll();
