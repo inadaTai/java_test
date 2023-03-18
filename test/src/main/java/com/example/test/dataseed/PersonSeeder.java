@@ -30,7 +30,7 @@ public class PersonSeeder implements CommandLineRunner {
      * ※イニシャライズ用の為、対象のテーブルにデータが存在する場合はログ出力して以降の処理は実行しない。
     */
 	private void loadPersonData() {
-        log.info("start seeder");
+        log.info("start person seeder");
         Boolean check_person_count = checkPersonData();
         if(check_person_count){
             log.info("already exist person data");

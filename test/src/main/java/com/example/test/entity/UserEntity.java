@@ -34,6 +34,13 @@ public class UserEntity {
     @Column(nullable = false)
     private String user_name;
 
-    @OneToMany(mappedBy="userEntity")
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @OneToMany(mappedBy="userEntity", fetch = FetchType.LAZY)
     private List<PostEntity> postEntity;
 }

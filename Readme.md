@@ -26,3 +26,10 @@ https://spring.pleiades.io/guides/gs/scheduling-tasks/
 
 ## APIドキュメントについて、swaggerAPIを導入した。
 https://qiita.com/nooboolean/items/ee794ec4b30d9e93bf9f
+
+## Interface
+インターフェースと抽象クラスの使い分け
+インターフェースや抽象クラスは、メソッドの具体的な処理内容を記述しないことから、両者に違いはないように思えるかもしれませんが、インターフェースはクラスで共通する仕様を定義するとき、抽象クラスは他のクラスの処理の骨組みを定義するときに利用されます
+
+## Serializable
+https://qiita.com/NBT/items/9f76c9fd1c7a90506658
