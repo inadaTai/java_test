@@ -3,8 +3,6 @@ package com.example.test.dataseed;
 import java.io.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.example.test.repository.CommentRepository;
 import com.example.test.entity.CommentEntity;
 import com.example.test.entity.UserEntity;
@@ -19,11 +17,13 @@ import javax.persistence.Query;
 import com.github.javafaker.Faker;
 import java.util.Locale;
 import org.springframework.transaction.annotation.Transactional; 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class CommentSeeder implements CommandLineRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(PersonSeeder.class);
+    private static final Logger log = LoggerFactory.getLogger(CommentSeeder.class.getName());
 
     @PersistenceContext private EntityManager entityManager;    
 
@@ -44,7 +44,7 @@ public class CommentSeeder implements CommandLineRunner {
         log.info("start comments seeder");
         Boolean check_comment_count = checkCommentData();
         if(check_comment_count){
-            log.info("already exist comment data");
+            log.error("already exist comment data");
             return;
         }
         List<CommentEntity> entities = new ArrayList<>();

@@ -3,14 +3,14 @@ package com.example.test.dataseed;
 import java.io.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.example.test.repository.PersonRepository;
 import com.example.test.entity.PersonEntity;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class PersonSeeder implements CommandLineRunner {
@@ -33,7 +33,7 @@ public class PersonSeeder implements CommandLineRunner {
         log.info("start person seeder");
         Boolean check_person_count = checkPersonData();
         if(check_person_count){
-            log.info("already exist person data");
+            log.debug("already exist person data");
             return;
         }
         BufferedReader br = null;
