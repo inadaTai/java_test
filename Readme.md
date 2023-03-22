@@ -33,3 +33,24 @@ https://qiita.com/nooboolean/items/ee794ec4b30d9e93bf9f
 
 ## Serializable
 https://qiita.com/NBT/items/9f76c9fd1c7a90506658
+
+# Flaywayのコマンドについて
+コミュニティエディションではロールバックのコマンドが使用できない。
+そのため、ロールバックしたいテーブルが出た場合は、以下のような対処が想定される。
+
+・任意テーブルを削除するSQLスクリプトを生成しテーブル削除。
+(※想定デメリットとしては、マイグレーションファイルが重ばってしまう。)
+
+・他のマイグレーション管理ツールを使いロールバック機能を利用
+
+## マイグレート
+./gradlew flywayMigrate
+
+## 現状マイグレートされているsqlファイルを確認する。
+./gradlew flywayInfo
+
+## ロールバック(エンタープライズエディション限定)
+./gradlew flywayUndo
+
+## ロールバック2つ前のマイグレーションファイル(エンタープライズエディション限定)
+./gradlew flywayUndo -Pcount=2

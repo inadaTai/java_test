@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	// id 'org.flywaydb.flyway' version '8.3.0'
+	id 'org.flywaydb.flyway' version '8.0.2'
 }
 
 group = 'com.example'
@@ -22,7 +24,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.graphhopper.external:jackson-datatype-jts:1.0-2.7'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	implementation 'org.flywaydb:flyway-core'	
+	runtimeOnly 'mysql:mysql-connector-java:8.0.12'
 	//twitterのapiで利用してるライブラリ(ダミーデータ投入シーダーなどで利用)
 	implementation 'com.twitter:twitter-api-java-sdk:2.0.3'
 	//faker(ダミーデータ投入シーダーなどで利用)
@@ -33,10 +38,18 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j'
+	// runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.batch:spring-batch-test'
+}
+
+flyway {
+    // url = "jdbc:mysql:"
+	url = 'jdbc:mysql://mysql/java_test'
+    user = 'user'
+    password = 'pass'
+    locations = ["classpath:db/migration"]
 }
 
 tasks.named('test') {
