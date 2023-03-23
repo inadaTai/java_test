@@ -2,7 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	// id 'org.flywaydb.flyway' version '8.3.0'
 	id 'org.flywaydb.flyway' version '8.0.2'
 }
 
@@ -27,7 +26,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.flywaydb:flyway-core'	
-	runtimeOnly 'mysql:mysql-connector-java:8.0.12'
+	implementation 'mysql:mysql-connector-java:8.0.12'
 	//twitterのapiで利用してるライブラリ(ダミーデータ投入シーダーなどで利用)
 	implementation 'com.twitter:twitter-api-java-sdk:2.0.3'
 	//faker(ダミーデータ投入シーダーなどで利用)
@@ -38,15 +37,15 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	// runtimeOnly 'com.mysql:mysql-connector-j'
+	// implementation 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.batch:spring-batch-test'
+	implementation 'org.flywaydb:flyway-mysql'
 }
 
 flyway {
-    // url = "jdbc:mysql:"
-	url = 'jdbc:mysql://mysql/java_test'
+	url = 'jdbc:mysql://mysql/java_test?useSSL=false'
     user = 'user'
     password = 'pass'
     locations = ["classpath:db/migration"]
@@ -71,4 +70,28 @@ bootRun { //debug用にgradleからJVMへ引数を渡す
 	systemProperties = System.properties // gradleのシステムプロパティをjavaに渡す
 	// 上記の記述で、以下の引数がjdkに渡される
 	jvmArgs=["-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8080"]
+}
+
+task migrateRollback() {
+	doLast {
+		//ロールバックしたいステップ数を指定する。(指定がない場合は最後のマイグレーションだけ削除)
+		def stepParam = 1
+		if (project.hasProperty('stepParam')) {
+			stepParam = project.getProperty('stepParam')
+		}
+
+		def driverClassName = 'com.mysql.cj.jdbc.Driver'
+		def url = 'jdbc:mysql://mysql/java_test'
+		def user = 'user'
+		def password = 'pass'
+
+		Class.forName(driverClassName);
+		def conn = DriverManager.getConnection(url, user, password)
+		def stmt = conn.createStatement()
+		stmt.execute("DELETE FROM flyway_schema_history ORDER BY version DESC LIMIT ${stepParam};")
+		stmt.close()
+		conn.close()
+
+		println "The users table has been dropped successfully."
+	}
 }

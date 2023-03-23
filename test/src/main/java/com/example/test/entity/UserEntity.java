@@ -21,26 +21,26 @@ import javax.persistence.*;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class UserEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int id;
-
-    @Column(nullable = false)
+    private int userId;
+    
+    @Column(name = "username", nullable = false)
+    private String username;
+    
+    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(nullable = false)
+    
+    @Column(name = "password", nullable = false)
     private String password;
-
-    @Column(nullable = false)
-    private String user_name;
-
-    public Integer getId() {
-        return id;
+    
+    public Integer getUserId() {
+        return userId;
     }
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer id) {
+        this.userId = userId;
     }
 
-    @OneToMany(mappedBy="userEntity", fetch = FetchType.LAZY)
-    private List<PostEntity> postEntity;
+    // @OneToMany(mappedBy="userEntity", fetch = FetchType.LAZY)
+    // private List<PostEntity> postEntity;
 }

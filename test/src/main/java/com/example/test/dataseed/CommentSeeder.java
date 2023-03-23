@@ -19,7 +19,9 @@ import java.util.Locale;
 import org.springframework.transaction.annotation.Transactional; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 
+@Order(3)
 @Component
 public class CommentSeeder implements CommandLineRunner {
 
@@ -44,7 +46,7 @@ public class CommentSeeder implements CommandLineRunner {
         log.info("start comments seeder");
         Boolean check_comment_count = checkCommentData();
         if(check_comment_count){
-            log.error("already exist comment data");
+            log.info("already exist comment data");
             return;
         }
         List<CommentEntity> entities = new ArrayList<>();
@@ -55,8 +57,8 @@ public class CommentSeeder implements CommandLineRunner {
                 List<PostEntity> post = entityManager.createNativeQuery("SELECT * FROM posts ORDER BY RAND() limit 1", PostEntity.class).getResultList();
                 entities.add(new CommentEntity(
                     i,
-                    post.get(0).getId(),
-                    user.get(0).getId(),
+                    post.get(0).getPostId(),
+                    user.get(0).getUserId(),
                     faker.lorem().fixedString(300)
                 )); 
             }

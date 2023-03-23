@@ -54,3 +54,11 @@ https://qiita.com/NBT/items/9f76c9fd1c7a90506658
 
 ## ロールバック2つ前のマイグレーションファイル(エンタープライズエディション限定)
 ./gradlew flywayUndo -Pcount=2
+
+## ファイル管理について
+新しいテーブルを追加する時は、バージョニングするので「V_任意の数字_任意のテーブル情報.sql」でファイルを生成する。
+
+Repeatable migrations関連のテーブルは「R_任意のテーブル情報.sql」でファイルを生成する。
+
+＜参考にした記事＞
+https://qiita.com/rubytomato@github/items/d1746585451ff0ba917c
