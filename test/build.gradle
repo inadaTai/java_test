@@ -88,7 +88,7 @@ task migrateRollback() {
 		Class.forName(driverClassName);
 		def conn = DriverManager.getConnection(url, user, password)
 		def stmt = conn.createStatement()
-		stmt.execute("DELETE FROM flyway_schema_history ORDER BY version DESC LIMIT ${stepParam};")
+		stmt.execute("DELETE FROM flyway_schema_history WHERE version IS NOT NULL ORDER BY version DESC LIMIT ${stepParam};")
 		stmt.close()
 		conn.close()
 

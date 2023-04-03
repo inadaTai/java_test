@@ -29,15 +29,35 @@ public class PostEntity {
     private String content;
     
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 
     public Integer getPostId() {
         return postId;
     }
-    public void setId(Integer id) {
+
+    public void setPostId(Integer id) {
         this.postId = postId;
     }
 
+    public void setCreatedAt() {
+        this.created_at = LocalDateTime.now();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle() {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent() {
+        this.content = content;
+    }
     // @ManyToOne(fetch = FetchType.LAZY)
     // @JoinColumn(name = "user_id", nullable = false)
     // private UserEntity userEntity;

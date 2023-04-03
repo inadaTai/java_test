@@ -23,8 +23,8 @@ public class PostService {
         return postRepository.findById(id).orElseThrow();
     }
 
-    public void savePost(PostEntity postEntity) {
-        postRepository.save(postEntity);
+    public PostEntity savePost(PostEntity postEntity) {
+        return postRepository.save(postEntity);
     }
 
     public void deletePost(Integer id) {
